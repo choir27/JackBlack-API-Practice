@@ -12,20 +12,31 @@
 		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
-		<button class="button">Play</button>
+
+		<h2 class = 'flex'>Opponent Hand</h2>
+		<section class = 'grid'>
+		<img id='OppCards' src = 'img/back.jpg'>
+		<img id ='OppCards1' src = 'img/back.jpg'>
+		<span class = 'flexbox'>Total:<h6 class = 'hidden' id = 'theirTotal'></h6></span>
 		<div id='OppHand'>
-		<img id='OppCards'>
-		<img id ='OppCards1'>
-		<h6 class = 'hidden' id = 'theirTotal'></h6>
 		</div>
-		<h2>Results</h2>
+	</section>
+	<h2 class = 'flex'>Your Hand</h2>
+
+	<section class = 'grid'>
+		<img id="yourCards" src = 'img/back.jpg'>
+		<img id="yourCards1" src = 'img/back.jpg'>
+		<span class = 'flexbox'>Total:<h6 id = 'yourTotal'></h6></span>
 		<div id = 'yourHand'>
-		<img id="yourCards">
-		<img id="yourCards1">
-		<h6 class = 'hidden' id = 'yourTotal'></h6>
 		</div>
+	</section>
+	<article class = 'flex'>
+		<button class="button">Play</button>
+
+		<span id = 'result' class = 'flexbox'>Result</span>
 		<button class = 'hidden' id="bet">Bet!</button>
 		<button class = 'hidden' id="show">Show Cards!</button>
+	</article>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>

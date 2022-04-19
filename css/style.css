@@ -7,21 +7,69 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 /******************************************
 /* LAYOUT
 /*******************************************/
+
 img{
   display: block;
   margin: 0 auto;
+  width: 20%;
+
 }
 
-#yourHand,#OppHand{
+section.grid{
+  flex-flow: row wrap;
+}
+
+
+.grid{
   display: flex;
+  overflow: auto;
 }
 
 .hidden{
   display: none;
 }
+
+body *{
+font-size: 2rem;
+}
+
+.flex{
+  display:flex;
+  justify-content: center;
+}
+
+#yourHand, #OppHand{
+display:flex;
+flex-direction: row;
+align-items: center;
+}
+
+#yourHand img, #OppHand img{
+  width: 100%;
+}
+
+article.flex, button{
+  margin: .5% .5%;
+}
+
+span.flexbox{
+  margin: 0 2%;
+}
+
+.flexbox{
+  display: flex;
+  align-items: center;
+}
+
+
+
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
