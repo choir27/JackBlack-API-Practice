@@ -35,6 +35,10 @@ this.removeAllChildNodes = ele =>{
 }
 
 this.drawFour = _ =>{
+    
+  this.oppHand = ''
+  this.yourHand = ''
+
     this.removeAllChildNodes(this.DOM('#OppHand'))
     this.removeAllChildNodes(this.DOM('#yourHand'))
 
@@ -57,6 +61,8 @@ fetch(draw4)
   .then(res=>res.json())
   .then(data=>{
 
+    localStorage.clear()
+ 
     if(data.remaining<=4){
         this.DOM('#redeal').classList.remove('hidden')
        this.DOM('.button').classList.add('hidden')
@@ -65,8 +71,12 @@ fetch(draw4)
        this.DOM('#redeal').addEventListener('click',this.redeal)
        }
 
+
    this.opponentCards = [data.cards[0].images.png, data.cards[1].images.png]
    this.yourCards = [data.cards[2].images.png, data.cards[3].images.png]
+
+  this.oppCardImages = localStorage.setItem('opponentCards',this.opponentCards)
+  this.yourCardImages = localStorage.setItem('yourCards',this.yourCards)
 
   this.DOM('#yourCards').src = this.yourCards[0]
   this.DOM('#yourCards1').src = this.yourCards[1]
@@ -74,7 +84,6 @@ fetch(draw4)
 
   this.oppVal.push(data.cards[0].value,data.cards[1].value)
   this.yourVal.push(data.cards[2].value,data.cards[3].value)
-
 
   this.yourVal = this.convertNumber(this.yourVal)
   this.oppVal = this.convertNumber(this.oppVal)
@@ -97,11 +106,16 @@ this.showCards = _ =>{
     this.DOM('.button').classList.remove('hidden')
 }
 
+
+this.oppHand = ''
+this.yourHand = ''
+
 this.bet = _ =>{
     let drawTwo= `https://deckofcardsapi.com/api/deck/${this.deckId}/draw/?count=2`
 fetch(drawTwo)
   .then(res=>res.json())
   .then(data=>{
+
 
   let newCard = document.createElement('img')
   newCard.src = data.cards[0].images.png
@@ -112,6 +126,12 @@ fetch(drawTwo)
   newOppCard.src = data.cards[1].images.png
   this.DOM('#OppHand').appendChild(newOppCard)
   this.oppVal.push(data.cards[1].value)
+
+  this.oppHand += data.cards[0].images.png += ', '
+  this.yourHand += data.cards[1].images.png += ', '
+
+  this.newOppImages = localStorage.setItem('newOppImages', this.oppHand)
+  this.newYourImages = localStorage.setItem('newYourImages', this.yourHand)
 
 this.oppVal = this.convertNumber(this.oppVal)
 this.yourVal = this.convertNumber(this.yourVal)
@@ -146,6 +166,9 @@ this.getSum = _ => {
  
    this.DOM('#theirTotal').innerText = theirSum
  
+   this.yourTotal  = localStorage.setItem('yourTotal' ,yourSum)
+   this.oppTotal = localStorage.setItem('oppTotal' ,theirSum)
+
    if(yourSum>21){
      this.DOM('#result').innerText = "You Lose!"
      this.DOM('.button').classList.remove('hidden')
@@ -211,3 +234,27 @@ return a+b
 let deck1 = new Deck()
 
 deck1.playJackBlack()
+
+deck1.oppCardImages = localStorage.getItem('opponentCards')
+deck1.yourCardImages = localStorage.getItem('yourCards')
+deck1.newOppImages = localStorage.getItem('newOppImages')
+deck1.newYourImages = localStorage.getItem('newYourImages')
+deck1.yourTotal  = localStorage.getItem('yourTotal')
+deck1.oppTotal = localStorage.getItem('oppTotal')
+
+if(deck1.oppCardImages!==null||deck1.yourCardImages!==null||deck1.oppTotal!==null||deck1.yourTotal!==null){
+  deck1.DOM('#yourCards').src = (deck1.yourCardImages.split(','))[0]
+  deck1.DOM('#yourCards1').src = (deck1.yourCardImages.split(','))[1]
+  deck1.DOM('#OppCards').src = (deck1.oppCardImages.split(','))[0]
+  deck1.DOM('#OppCards1').src = (deck1.oppCardImages.split(','))[1]
+  deck1.DOM('#yourTotal').innerText = deck1.yourTotal
+  deck1.DOM('#theirTotal').innerText = deck1.oppTotal
+}
+
+if(deck1.newOppImages!==null||deck1.newYourImages!==null && deck1.newOppImages.length === 1){
+  let newCard = document.createElement('img')
+  deck1.newOppImages = deck1.newOppImages.split(', ')
+  newCard.src = deck1.newOppImages[0]
+  deck1.DOM('#yourHand').appendChild(newCard)
+  deck1.yourVal.push(data.cards[0].value)
+}
