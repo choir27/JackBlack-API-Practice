@@ -23,7 +23,7 @@ this.redeal = _ =>{
     .then(data=>{
     this.deckId = data.deck_id
     this.DOM('.button').classList.remove('hidden')
-    this.DOM('#redeal').classList.add('hidden')
+    this.DOM('#redeal').classList.add('hidden')   
     this.DOM('.button').addEventListener('click',this.drawFour)
     })
 }
@@ -64,7 +64,7 @@ fetch(draw4)
     localStorage.clear()
  
     if(data.remaining<=4){
-        this.DOM('#redeal').classList.remove('hidden')
+      this.DOM('#redeal').classList.remove('hidden')
        this.DOM('.button').classList.add('hidden')
        this.DOM('#bet').classList.add('hidden')
        this.DOM('#show').classList.add('hidden')
@@ -104,6 +104,7 @@ this.showCards = _ =>{
     this.DOM('#theirTotal').classList.remove('hidden')
     this.getFinalSum()
     this.DOM('.button').classList.remove('hidden')
+
 }
 
 
@@ -116,7 +117,6 @@ fetch(drawTwo)
   .then(res=>res.json())
   .then(data=>{
 
-
   let newCard = document.createElement('img')
   newCard.src = data.cards[0].images.png
   this.DOM('#yourHand').appendChild(newCard)
@@ -127,14 +127,16 @@ fetch(drawTwo)
   this.DOM('#OppHand').appendChild(newOppCard)
   this.oppVal.push(data.cards[1].value)
 
-  this.oppHand += data.cards[0].images.png += ', '
-  this.yourHand += data.cards[1].images.png += ', '
+  this.oppVal = this.convertNumber(this.oppVal)
+  this.yourVal = this.convertNumber(this.yourVal)
+
+  this.oppHand += data.cards[1].images.png += ', '
+  this.yourHand += data.cards[0].images.png += ', '
 
   this.newOppImages = localStorage.setItem('newOppImages', this.oppHand)
   this.newYourImages = localStorage.setItem('newYourImages', this.yourHand)
 
-this.oppVal = this.convertNumber(this.oppVal)
-this.yourVal = this.convertNumber(this.yourVal)
+
   this.getSum()
 })
 }
@@ -184,50 +186,49 @@ this.getSum = _ => {
  }
  
  this.getFinalSum = _ =>{ 
-    let yourSum = this.yourVal.reduce((a,b)=>{
+    this.yourSum = this.yourVal.reduce((a,b)=>{
 return a+b
     },0)
-    this.DOM('#yourTotal').innerText = yourSum
+    this.DOM('#yourTotal').innerText = this.yourSum
         
         
-    let theirSum = this.oppVal.reduce((a,b)=>{
+    this.theirSum = this.oppVal.reduce((a,b)=>{
  return a+b
     },0)
 
-  this.DOM('#theirTotal').innerText = theirSum
+  this.DOM('#theirTotal').innerText = this.theirSum
  
-   this.DOM('#theirTotal').innerText = theirSum
-   if(yourSum>21){
-     this.DOM('#result').innerText = "You Lose!"
-     this.DOM('.button').classList.remove('hidden')
-     this.DOM('#bet').classList.add('hidden')
-     this.DOM('#show').classList.add('hidden')
-   }else if(theirSum>21){
-     this.DOM('#result').innerText = "You Win!"
-     this.DOM('.button').classList.remove('hidden')
-     this.DOM('#bet').classList.add('hidden')
-     this.DOM('#show').classList.add('hidden')
-   }else if(yourSum>theirSum){
-     this.DOM('#result').innerText = "You Win!"
-     this.DOM('.button').classList.remove('hidden')
-     this.DOM('#bet').classList.add('hidden')
-     this.DOM('#show').classList.add('hidden')
-   }else if(theirSum>yourSum){
-     this.DOM('#result').innerText = "You Lose!"
-     this.DOM('.button').classList.remove('hidden')
-     this.DOM('#bet').classList.add('hidden')
-     this.DOM('#show').classList.add('hidden')
-   }else if(theirSum===yourSum){
-     this.DOM('#result').innerText = "It is a Tie!"
-     this.DOM('.button').classList.remove('hidden')
-     this.DOM('#bet').classList.add('hidden')
-     this.DOM('#show').classList.add('hidden')
- 
-   }
-
+  
+  if(this.yourSum>21){
+    this.DOM('#result').innerText = "You Lose!"
+    this.DOM('.button').classList.remove('hidden')
+    this.DOM('#bet').classList.add('hidden')
+    this.DOM('#show').classList.add('hidden')
+  }else if(this.theirSum>21){
+    this.DOM('#result').innerText = "You Win!"
+    this.DOM('.button').classList.remove('hidden')
+    this.DOM('#bet').classList.add('hidden')
+    this.DOM('#show').classList.add('hidden')
+  }else if(this.yourSum>this.theirSum){
+    this.DOM('#result').innerText = "You Win!"
+    this.DOM('.button').classList.remove('hidden')
+    this.DOM('#bet').classList.add('hidden')
+    this.DOM('#show').classList.add('hidden')
+  }else if(this.theirSum>this.yourSum){
+    this.DOM('#result').innerText = "You Lose!"
+    this.DOM('.button').classList.remove('hidden')
+    this.DOM('#bet').classList.add('hidden')
+    this.DOM('#show').classList.add('hidden')
+  }else if(this.theirSum===this.yourSum){
+    this.DOM('#result').innerText = "It is a Tie!"
+    this.DOM('.button').classList.remove('hidden')
+    this.DOM('#bet').classList.add('hidden')
+    this.DOM('#show').classList.add('hidden')
+  }
 }
 
 }
+
 
 
 
@@ -237,24 +238,42 @@ deck1.playJackBlack()
 
 deck1.oppCardImages = localStorage.getItem('opponentCards')
 deck1.yourCardImages = localStorage.getItem('yourCards')
-deck1.newOppImages = localStorage.getItem('newOppImages')
-deck1.newYourImages = localStorage.getItem('newYourImages')
+
 deck1.yourTotal  = localStorage.getItem('yourTotal')
 deck1.oppTotal = localStorage.getItem('oppTotal')
+deck1.newOppImages = localStorage.getItem('newOppImages')
+deck1.newYourImages = localStorage.getItem('newYourImages')
 
 if(deck1.oppCardImages!==null||deck1.yourCardImages!==null||deck1.oppTotal!==null||deck1.yourTotal!==null){
   deck1.DOM('#yourCards').src = (deck1.yourCardImages.split(','))[0]
   deck1.DOM('#yourCards1').src = (deck1.yourCardImages.split(','))[1]
   deck1.DOM('#OppCards').src = (deck1.oppCardImages.split(','))[0]
-  deck1.DOM('#OppCards1').src = (deck1.oppCardImages.split(','))[1]
   deck1.DOM('#yourTotal').innerText = deck1.yourTotal
   deck1.DOM('#theirTotal').innerText = deck1.oppTotal
 }
 
-if(deck1.newOppImages!==null||deck1.newYourImages!==null && deck1.newOppImages.length === 1){
+if(deck1.newOppImages!==null||deck1.newYourImages!==null && deck1.newOppImages.length > 2){
   let newCard = document.createElement('img')
-  deck1.newOppImages = deck1.newOppImages.split(', ')
-  newCard.src = deck1.newOppImages[0]
+  deck1.newYourImages = deck1.newYourImages.split(', ')
+  newCard.src = deck1.newYourImages[0]
   deck1.DOM('#yourHand').appendChild(newCard)
-  deck1.yourVal.push(data.cards[0].value)
+
+  let newOppCard = document.createElement('img')
+  deck1.newOppImages = deck1.newOppImages.split(', ')
+  newOppCard.src = deck1.newOppImages[0]
+  deck1.DOM('#OppHand').appendChild(newOppCard)
+}
+
+
+if(deck1.newOppImages!==null||deck1.newYourImages!==null && deck1.newOppImages.length === 3){
+  let newCard = document.createElement('img')
+  deck1.newYourImages = deck1.newYourImages
+  newCard.src = deck1.newYourImages[1]
+  deck1.DOM('#yourHand').appendChild(newCard)
+
+  let newOppCard = document.createElement('img')
+  deck1.newOppImages = deck1.newOppImages
+  newOppCard.src = deck1.newOppImages[1]
+  deck1.DOM('#OppHand').appendChild(newOppCard)
+
 }
