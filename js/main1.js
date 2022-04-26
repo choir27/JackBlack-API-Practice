@@ -277,3 +277,19 @@ if(deck1.newOppImages!==null||deck1.newYourImages!==null && deck1.newOppImages.l
   deck1.DOM('#OppHand').appendChild(newOppCard)
 
 }
+
+
+
+function Hub() {
+  this.getHelp = _ =>{
+    deck1.DOM('.helpBox').style.display = 'flex'
+    deck1.DOM('#close').addEventListener('click',this.closeBox)
+  },
+  this.closeBox = _ => {
+    deck1.DOM('.helpBox').style.display = 'none'
+  }
+}
+
+let hub = new Hub()
+
+deck1.DOM('.help').addEventListener('click',hub.getHelp)

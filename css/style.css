@@ -46,7 +46,28 @@ font-size: 2rem;
 
 body{
   background: no-repeat url('background.jpg') center/cover;
+}
 
+.helpBox{
+  text-align: center;
+  position: relative;
+  bottom: 58vh;
+  left: 30vw;
+  width: 40%;
+  height: 25vh;
+  z-index: 2;
+  background: linear-gradient(rgb(124, 40, 137), rgb(163, 57, 180),rgb(186, 90, 201),rgb(217, 122, 231), white); 
+  align-items: center;
+}
+
+.helpBox span{
+  color: white;
+}
+
+
+.help{
+  display: flex;
+  justify-content: flex-end;
 }
 
 .flex{
@@ -93,8 +114,34 @@ img{
 }
 }
 
-@media all and (min-width:500px) and (max-width: 1076px){
+@media all and (min-width:758px) and (max-width: 1076px){
   img{
     width: 25%;
   }
   }
+
+@media all and (min-width: 466px) and (max-width: 757px){
+  .helpBox{
+    margin-bottom: -12vh;
+    padding-bottom: -12vh;
+  }
+}
+
+@media all and (min-width: 100px) and (max-width:465px){
+body{
+  height: 120vh;
+}
+#OppHand{
+  width: 60%;
+}
+ #yourHand{
+width: 40%;
+ }
+ #yourHand img{
+   width: 65%;
+ }
+
+ #OppHand img{
+   width: 40%;
+ }
+}
