@@ -1,25 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<!--
+	Lens by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
 	<head>
-    	<meta charset="utf-8">
-    	<meta name="description" content="This is where your description goes">
-    	<meta name="keywords" content="one, two, three">
-
-		<title>Title in the tab</title>
-
-		<!-- external CSS link -->
-		<link rel="stylesheet" href="css/normalize.css">
-		<link rel="stylesheet" href="css/style.css">
+		<title>Lens by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body>
-		<div class = 'help'>
-<button>Help</button>
-		</div>
-		<h2 class = 'flex'>Opponent Hand</h2>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>JackBlack</h1>
+						<p>The goal is to have a higher number than your opponent without going over 21.  Aces are 11, and when you bet you both draw one card.</p>
+						<ul class="icons">
+							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+							<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+					</header>
+
+				<!-- Thumbnail -->
+					<section id="thumbnails">
+						<article id = 'jackBlack' class = 'active'>
+							<a class="thumbnail" href="img/background.jpg" data-position="left center"></a>
+							<h2 class = 'flex'>Opponent Hand</h2>
 		<section class = 'grid'>
 		<img id='OppCards' src = 'img/back.jpg'>
 		<img id ='OppCards1' src = 'img/back.jpg'>
-		<span class = 'theirTotal flexbox'>Total:<h6 class = 'hidden' id = 'theirTotal'></h6></span>
+		<span class = 'theirTotal'>Total:<h6 class = 'hidden' id = 'theirTotal'></h6></span>
 		<div id='OppHand'>
 		</div>
 	</section>
@@ -28,7 +46,7 @@
 	<section class = 'grid'>
 		<img id="yourCards" src = 'img/back.jpg'>
 		<img id="yourCards1" src = 'img/back.jpg'>
-		<span class = 'flexbox'>Total:<h6 id = 'yourTotal'></h6></span>
+		<span>Total:<h6 id = 'yourTotal'></h6></span>
 		<div id = 'yourHand'>
 		</div>
 	</section>
@@ -40,16 +58,23 @@
 		<button class = 'hidden' id="show">Show Cards!</button>
 		<button id = 'redeal' class = 'hidden'>Re-Deal!</button>
 	</article>
+		</article>
+					</section>
 
-	<div id = 'hidden'class = 'hidden helpBox'>
-		<button id = 'close'>X</button>
-	<span>The goal is to have a higher number than your opponent without </br>
-	going over 21.  Aces are 11, and when you bet you both draw one card.</span>
-	</div>
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="copyright">
+							<li>&copy; Choir</li><li>Design: <a href="http://html5up.net">HTML5 UP</a>.</li>
+						</ul>
+					</footer>
 
+			</div>
 
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/main.js"></script>
 
-		<!-- <script type="text/javascript" src="js/main.js"></script> -->
-		<script type="text/javascript" src="js/main1.js"></script>
 	</body>
-	
+</html>
